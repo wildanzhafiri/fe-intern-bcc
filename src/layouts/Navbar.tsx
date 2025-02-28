@@ -1,51 +1,125 @@
-import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { HiOutlineMenu, HiX } from 'react-icons/hi';
 import { MdOutlineShoppingCart } from 'react-icons/md';
+import { CiSearch } from 'react-icons/ci';
+import { useAuth } from '../hooks/useAuth';
 import { TbMessage } from 'react-icons/tb';
 import { GoBell } from 'react-icons/go';
-import { CiSearch } from 'react-icons/ci';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/ui/Button';
+import logodanlentara from '../assets/logo dan lentara.png';
+import logo from '../assets/logo lentara.png';
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
   return (
-    <nav className="bg-white px-6 fixed w-full top-0 z-50">
-      <div className="flex justify-between pt-2 mb-3 text-sm text-gray-600">
-        <div className="flex space-x-6">
-          <Link to="/" className="hover:text-black">
-            Download
-          </Link>
-          <Link to="/" className="hover:text-black">
+    <nav className="bg-primary-500 px-4 md:px-10 fixed w-full top-0 z-50">
+      <div className="hidden md:flex justify-between pt-2 text-sm text-white">
+        <div className="flex space-x-14 text-base px-5">
+          <Link to="/" className="hover:text-tertiary-400">
             Bantuan
           </Link>
-        </div>
-        <div className="flex space-x-6">
-          <Link to="/" className="hover:text-black">
+          <Link to="/" className="hover:text-tertiary-400">
             Promo
           </Link>
-          <Link to="/" className="hover:text-black">
+          <Link to="/" className="hover:text-tertiary-400">
             Daftar Pesanan
           </Link>
-          <Link to="/" className="hover:text-black">
-            Mulai Berjualan
+          <Link to="/" className="hover:text-tertiary-400">
+            Mulai Beri Sewa
           </Link>
         </div>
       </div>
 
-      <div className="flex items-center pb-3 border-b">
-        <div className="w-40 h-10 bg-gray-700"></div>
+      <div className="flex items-center h-16 md:h-20">
+        <button className="md:hidden text-white text-3xl cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <HiX /> : <HiOutlineMenu />}
+        </button>
 
-        <div className="flex flex-1 mx-4">
+        <Link to="/" className="md:hidden flex items-center ml-4">
+          <img src={logo} alt="Logo" className="h-10 w-10" />
+        </Link>
+
+        <div className="hidden md:flex items-center w-40 lg:w-48 h-auto mx-4 md:mx-0">
+          <img src={logodanlentara} alt="lentara" className="h-12 md:h-16 w-auto object-contain" />
+        </div>
+
+        <div className="flex flex-1 mx-4 md:mx-8">
           <div className="relative w-full">
-            <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
-            <input type="text" placeholder="Cari di (nama platform)" className="w-full pl-10 pr-4 py-2 border rounded-lg text-gray-600 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black" />
+            <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900 text-lg" />
+            <input type="text" placeholder="Cari di Lentara" className="w-full pl-10 pr-4 py-2 md:py-3 border rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-1 focus:ring-black" />
           </div>
         </div>
 
-        <div className="flex items-center space-x-4 ml-auto">
-          <MdOutlineShoppingCart className="text-gray-600 hover:text-black text-2xl cursor-pointer" />
-          <TbMessage className="text-gray-600 hover:text-black text-2xl cursor-pointer" />
-          <GoBell className="text-gray-600 hover:text-black text-2xl cursor-pointer" />
-          {/* photo profil */}
-          <div className="w-10 h-10 bg-gray-300 rounded-full cursor-pointer hover:bg-gray-400"></div>
+        <div className="flex items-center space-x-2 md:space-x-8">
+          <MdOutlineShoppingCart className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-tertiary-400 cursor-pointer" onClick={() => navigate(user ? '/cart' : '/login')} />
+
+          {user ? (
+            <div className="flex items-center space-x-2 md:space-x-6">
+              <TbMessage className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-tertiary-400 cursor-pointer" />
+              <GoBell className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-tertiary-400 cursor-pointer" />
+
+              <div className="relative">
+                <img
+                  src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+                  className="hidden md:block w-8 h-8 md:w-12 md:h-12 rounded-full cursor-pointer"
+                  alt="User Avatar"
+                  onClick={() => setProfileOpen(!profileOpen)}
+                />
+                {profileOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-lg py-2">
+                    <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" onClick={logout}>
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center space-x-4">
+              <Button onClick={() => navigate('/login')} variant="transparent" text="Masuk" />
+              <Button onClick={() => navigate('/register')} variant="third" text="Daftar" />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-md transition-all duration-300 ease-in-out ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+        <div className="py-4 px-6 flex flex-col space-y-4">
+          <Link to="/" className="hover:text-tertiary-400">
+            Bantuan
+          </Link>
+          <Link to="/" className="hover:text-tertiary-400">
+            Promo
+          </Link>
+          <Link to="/" className="hover:text-tertiary-400">
+            Daftar Pesanan
+          </Link>
+          <Link to="/" className="hover:text-tertiary-400">
+            Mulai Beri Sewa
+          </Link>
+
+          {user ? (
+            <div className="flex flex-col items-center pt-4">
+              <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" className="w-12 h-12 rounded-full cursor-pointer" alt="User Avatar" />
+              <p className="text-gray-700 mt-2">Username</p>
+
+              <button className="mt-3 px-4 py-2 bg-red-500 text-white rounded-md w-full text-center" onClick={logout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center my-2 gap-3">
+              Masuk
+              <Button onClick={() => navigate('/login')} variant="transparent" text="Masuk" full />
+              <Button onClick={() => navigate('/register')} variant="third" text="Daftar" full />
+            </div>
+          )}
         </div>
       </div>
     </nav>
