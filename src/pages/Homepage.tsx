@@ -1,7 +1,15 @@
-import React from 'react';
+import CategorySection from '../components/category/CategorySection';
+import Recommendation from '../components/Recommendation';
+import Slider from '../components/ui/Slider';
 
 const Homepage = () => {
-  return <div className="">Ini Homepage</div>;
+  return (
+    <div>
+      <Slider />
+      <CategorySection />
+      <Recommendation />
+    </div>
+  );
 };
 
 export default Homepage;
