@@ -5,8 +5,8 @@ import linkedinLogo from '../assets/linkedin.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-tertiary-400 text-base h-full">
-      <div className="h-11 bg-tertiary-300"></div>
+    <footer className="bg-primary-400 text-base h-full">
+      <div className="h-11 bg-tertiary-400"></div>
 
       <div className="container mx-auto py-16 px-6 flex flex-col md:flex-row justify-center gap-10 md:gap-12 lg:gap-32 text-center md:text-left">
         <div className="flex flex-col items-center w-full md:w-auto">
@@ -19,24 +19,24 @@ const Footer = () => {
         <div className="w-full md:w-auto">
           <h3 className="font-bold mb-2 text-white">(Nama platform)</h3>
           <ul className="space-y-2 text-white">
-            <li className="cursor-pointer hover:text-black">Tentang Kami</li>
-            <li className="cursor-pointer hover:text-black">Blog</li>
-            <li className="cursor-pointer hover:text-black">Promo</li>
-            <li className="cursor-pointer hover:text-black">Metode Pembayaran</li>
-            <li className="cursor-pointer hover:text-black">Lacak Pesanan</li>
-            <li className="cursor-pointer hover:text-black">Pengembalian Barang</li>
-            <li className="cursor-pointer hover:text-black">Garansi</li>
-            <li className="cursor-pointer hover:text-black">Mulai Jual</li>
+            <li className="cursor-pointer hover:text-primary-700">Tentang Kami</li>
+            <li className="cursor-pointer hover:text-primary-700">Blog</li>
+            <li className="cursor-pointer hover:text-primary-700">Promo</li>
+            <li className="cursor-pointer hover:text-primary-700">Metode Pembayaran</li>
+            <li className="cursor-pointer hover:text-primary-700">Lacak Pesanan</li>
+            <li className="cursor-pointer hover:text-primary-700">Pengembalian Barang</li>
+            <li className="cursor-pointer hover:text-primary-700">Garansi</li>
+            <li className="cursor-pointer hover:text-primary-700">Mulai Jual</li>
           </ul>
         </div>
 
         <div className="w-full md:w-auto">
           <h3 className="font-bold mb-2 text-white">Layanan</h3>
           <ul className="space-y-2 text-white">
-            <li className="cursor-pointer hover:text-black">Pusat Bantuan</li>
-            <li className="cursor-pointer hover:text-black">Kontak Media</li>
-            <li className="cursor-pointer hover:text-black">Kebijakan dan Privasi</li>
-            <li className="cursor-pointer hover:text-black">FAQs</li>
+            <li className="cursor-pointer hover:text-primary-700">Pusat Bantuan</li>
+            <li className="cursor-pointer hover:text-primary-700">Kontak Media</li>
+            <li className="cursor-pointer hover:text-primary-700">Kebijakan dan Privasi</li>
+            <li className="cursor-pointer hover:text-primary-700">FAQs</li>
           </ul>
         </div>
 
