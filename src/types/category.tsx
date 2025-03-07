@@ -4,6 +4,7 @@ export interface Category {
   id: number;
   name: ProductCategory;
   icon: React.ReactNode;
+  value: string;
 }
 
 export enum ProductCategory {
