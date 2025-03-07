@@ -26,8 +26,6 @@ const LoginForm: React.FC = () => {
 
     startLoading();
 
-    await new Promise<void>((resolve) => setTimeout(resolve, 3000));
-
     const success = await login(username, password);
 
     if (success) {
