@@ -1,6 +1,11 @@
 import { SlArrowRight } from 'react-icons/sl';
 
-const Breadcrumb: React.FC = () => {
+interface BreadcrumbProps {
+  productTitle: string;
+  category: string;
+}
+
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ productTitle, category }) => {
   return (
     <div className="md:mt-7">
       <ul className="flex text-xs gap-1 text-[#2E4053] items-center">
@@ -8,9 +13,9 @@ const Breadcrumb: React.FC = () => {
           <a href="/">Beranda</a>
         </li>
         <SlArrowRight className="w-3 h-3" />
-        <li className="cursor-pointer hover:text-black rounded-md transition-all duration-300">Kategori</li>
+        <li className="cursor-pointer hover:text-black rounded-md transition-all duration-300">{category}</li>
         <SlArrowRight className="w-3 h-3" />
-        <li className="cursor-pointer hover:text-black rounded-md transition-all duration-300">Nama Produk</li>
+        <li className="cursor-pointer hover:text-black rounded-md transition-all duration-300">{productTitle}</li>
       </ul>
     </div>
   );
