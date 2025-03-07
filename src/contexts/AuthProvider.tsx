@@ -1,9 +1,11 @@
-import { createContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useState, ReactNode } from 'react';
+import axiosInstance from '../api/axiosInstance';
 
 interface AuthContextType {
   user: string | null;
-  login: (username: string, password: string) => boolean;
-  register: (username: string, password: string, email: string) => boolean;
+  token: string | null;
+  login: (username: string, password: string) => Promise<boolean>;
+  register: (username: string, password: string, email: string) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -11,48 +13,57 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>(() => localStorage.getItem('user'));
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
 
-  const [users, setUsers] = useState<{ username: string; password: string; email: string }[]>(() => {
-    const storedUsers = localStorage.getItem('users');
-    return storedUsers
-      ? JSON.parse(storedUsers)
-      : [
-          { username: 'admin', password: 'admin123', email: 'admin@example.com' },
-          { username: 'user', password: 'user123', email: 'user@example.com' },
-        ];
-  });
+  const login = async (username: string, password: string): Promise<boolean> => {
+    try {
+      const response = await axiosInstance.post('/users/login', {
+        username,
+        password,
+      });
 
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(users));
-  }, [users]);
+      if (response.data.token) {
+        localStorage.setItem('user', username);
+        localStorage.setItem('token', response.data.token);
+        setUser(username);
+        setToken(response.data.token);
+        return true;
+      }
 
-  const login = (username: string, password: string) => {
-    const validUser = users.find((u) => u.username === username && u.password === password);
-
-    if (validUser) {
-      localStorage.setItem('user', username);
-      setUser(username);
-      return true;
+      return false;
+    } catch (error) {
+      console.error('Login failed:', error);
+      return false;
     }
-
-    return false;
   };
 
-  const register = (username: string, password: string, email: string) => {
-    const userExists = users.some((u) => u.username === username || u.email === email);
-    if (userExists) return false;
+  const register = async (username: string, password: string, email: string): Promise<boolean> => {
+    try {
+      const response = await axiosInstance.post('/users/register', {
+        username,
+        password,
+        email,
+      });
 
-    const newUser = { username, password, email };
-    setUsers([...users, newUser]);
-    return true;
+      if (response.status === 201 || response.status === 200) {
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error('Register failed:', error);
+      return false;
+    }
   };
 
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
+    setToken(null);
   };
 
-  return <AuthContext.Provider value={{ user, login, register, logout }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, token, login, register, logout }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContext;
