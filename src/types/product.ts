@@ -1,12 +1,14 @@
-import { ProductCategory } from '../types/category';
-
 export interface Product {
-  id: number;
-  imageUrl: string;
+  id: string;
   title: string;
+  description: string;
+  Specification: string;
+  category: string;
   price: number;
-  location: string;
-  borrower: number;
+  stock: number;
+  rent_count: number;
   rating: number;
-  category: ProductCategory;
+  photo_url: string;
+  created_at: string;
+  updated_at: string;
 }
