@@ -14,7 +14,7 @@ export const useProducts = (searchQuery = '', category = '') => {
       }
       return getProducts();
     },
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 1,
   });
 };
 
@@ -23,7 +23,7 @@ export const useProductsByCategory = (category: string) => {
     queryKey: ['products', category],
     queryFn: () => getProductsByCategory(category),
     enabled: !!category,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 1,
   });
 };
 
