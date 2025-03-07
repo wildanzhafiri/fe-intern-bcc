@@ -1,25 +1,35 @@
-const ProductDetails: React.FC = () => {
+import { useParams } from 'react-router-dom';
+import { useProductSpecifications } from '../../hooks/useProduct';
+import { Product } from '../../types/product';
+
+interface ProductInfoProps {
+  product: Product;
+}
+
+const ProductDetails: React.FC<ProductInfoProps> = ({ product }) => {
+  const { id } = useParams<{ id: string }>();
+  const { data: specifications } = useProductSpecifications(id!);
+
   return (
     <div className="border-t pt-6 my-5">
       <h2 className="text-2xl font-semibold mb-4">Detail Produk</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="border rounded-lg p-4">
+        <div className="border-2 border-gray-300 rounded-lg p-4">
           <h3 className="text-lg font-semibold mb-2">Spesifikasi</h3>
-          <ul className="text-gray-700 space-y-2">
-            <li>Spesifikasi 1</li>
-            <li>Spesifikasi 2</li>
-            <li>Spesifikasi 3</li>
-            <li>Spesifikasi 4</li>
-            <li>Spesifikasi 5</li>
-          </ul>
+          {specifications && specifications.length > 0 ? (
+            <ul className="text-[#383838] space-y-2">
+              {specifications.map((spec, index) => (
+                <li key={index}>{spec}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-[#383838]">Tidak ada spesifikasi tersedia.</p>
+          )}
         </div>
 
         <div className="md:col-span-2">
-          <p className="text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <p className="text-[#383838]">{product.description}</p>
         </div>
       </div>
     </div>
