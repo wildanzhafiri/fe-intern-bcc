@@ -141,7 +141,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center my-2 gap-3">
-              <Button onClick={() => navigate('/login')} variant="transparent" text="Masuk" full />
+              <Button onClick={() => navigate('/login')} variant="transparent2" text="Masuk" full />
               <Button onClick={() => navigate('/register')} variant="daftar" text="Daftar" full />
             </div>
           )}
