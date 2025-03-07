@@ -20,9 +20,9 @@ const StoreInfo: React.FC = () => {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <Button icon={<TbMessage />} variant={'transparent'} text={'Chat'} />
-        <Button icon={<LuStore />} variant={'transparent'} text={'Toko'} />
-        <Button icon={<MdOutlineReport className="w-5 h-7" />} variant={'transparent'} text={'Laporkan'} />
+        <Button icon={<TbMessage />} variant={'transparent2'} text={'Chat'} />
+        <Button icon={<LuStore />} variant={'transparent2'} text={'Toko'} />
+        <Button icon={<MdOutlineReport className="w-5 h-7" />} variant={'transparent2'} text={'Laporkan'} />
         <Button icon={<CiHeart className="w-7 h-7" />} variant={'none'} />
       </div>
     </div>
