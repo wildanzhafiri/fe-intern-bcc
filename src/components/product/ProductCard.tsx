@@ -10,7 +10,7 @@ interface ProductProps {
 
 const ProductCard: React.FC<ProductProps> = ({ product, onClick }) => {
   return (
-    <div className="border border-gray-300 bg-white cursor-pointer hover:scale-105 transition-transform duration-300 rounded-2xl shadow-md w-full h-[320px] md:h-[380px] flex flex-col" onClick={onClick}>
+    <div className="border border-gray-300 bg-white cursor-pointer hover:scale-105 transition-transform duration-300 rounded-2xl shadow-md h-[320px] md:h-[380px] flex flex-col" onClick={onClick}>
       <img src={product.photo_url} alt={`image of ${product.title}`} className="w-full h-44 md:h-56 object-contain rounded-t-2xl mb-2" />
       <div className="p-3 flex flex-col flex-grow justify-between">
         <div>
