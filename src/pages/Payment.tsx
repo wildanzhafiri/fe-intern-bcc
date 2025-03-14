@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SellerInfo from '../components/payment/SellerInfo';
 import OrderItem from '../components/payment/OrderItem';
 import PaymentMethod from '../components/payment/PaymentMethod';
@@ -16,20 +16,25 @@ const stores = [
 ];
 
 const Payment: React.FC = () => {
+  const [isDelivery, setIsDelivery] = useState(false);
   return (
     <div className="w-full mx-auto p-6 space-y-6">
       <div className="flex gap-2 mb-14">
-        <button className="bg-primary-400 text-white font-bold px-6 py-2 rounded-full">Pick Up</button>
-        <button className="bg-white border border-primary-400 px-6 py-2 rounded-full">Delivery</button>
+        <button onClick={() => setIsDelivery(false)} className={`px-6 py-2 rounded-full font-bold ${!isDelivery ? 'bg-primary-400 text-white' : 'bg-white border border-primary-400 text-primary-400'}`}>
+          Pick Up
+        </button>
+        <button onClick={() => setIsDelivery(true)} className={`px-6 py-2 rounded-full font-bold ${isDelivery ? 'bg-primary-400 text-white' : 'bg-white border border-primary-400 text-primary-400'}`}>
+          Delivery
+        </button>
       </div>
 
-      <SellerInfo />
+      <SellerInfo isDelivery={isDelivery} />
 
       <div>
         <h2 className="text-2xl px-2 mb-5">Pesanan</h2>
         {stores.map((store, storeIndex) => (
-          <div key={storeIndex} className="p-4 border border-gray-300 rounded-xl mb-4">
-            <h2 className="text-lg font-semibold mb-2 px-4">{store.name}</h2>
+          <div key={storeIndex} className="md:p-4 border border-gray-300 rounded-xl mb-4">
+            <h2 className="text-lg bg-primary-400 py-2 text-white md:text-black md:bg-transparent font-semibold mb-2 px-4">{store.name}</h2>
             {store.items.map((item, itemIndex) => (
               <OrderItem key={itemIndex} {...item} />
             ))}
