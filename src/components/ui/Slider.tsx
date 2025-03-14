@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 
+import banner1 from '../../assets/banner1.png';
+import banner2 from '../../assets/banner2.png';
+
 const images = [
-  ['/src/assets/banner1.png', '/src/assets/banner2.png'],
-  ['/src/assets/banner1.png', '/src/assets/banner2.png'],
-  ['/src/assets/banner1.png', '/src/assets/banner2.png'],
-  ['/src/assets/banner1.png', '/src/assets/banner2.png'],
+  [banner1, banner2],
+  [banner1, banner2],
+  [banner1, banner2],
+  [banner1, banner2],
 ];
 
 const Slider: React.FC = () => {
