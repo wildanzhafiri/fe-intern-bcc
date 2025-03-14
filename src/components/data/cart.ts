@@ -2,7 +2,7 @@ import { Cart } from '../../types/cart';
 
 import hdcamera from '../../assets/hdcamera.png';
 import nintendo from '../../assets/nintendo.svg';
-import ps5 from '../../assets/ps5.jpg';
+import ps5 from '../../assets/ps5-2.jpg';
 
 export const cartData: Cart[] = [
   {
@@ -13,7 +13,7 @@ export const cartData: Cart[] = [
     stock: 2,
     checked: false,
     storeId: 1,
-    storeName: 'Toko Kamera',
+    storeName: 'DigitalStore',
   },
   {
     id: 2,
@@ -23,16 +23,16 @@ export const cartData: Cart[] = [
     stock: 2,
     checked: false,
     storeId: 2,
-    storeName: 'Toko Game',
+    storeName: 'GadgetHub',
   },
   {
     id: 3,
-    name: 'PS5',
+    name: 'Playstation 5',
     price: 200000,
     image: ps5,
     stock: 2,
     checked: false,
     storeId: 2,
-    storeName: 'Toko Game',
+    storeName: 'GadgetHub',
   },
 ];
