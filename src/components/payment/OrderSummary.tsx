@@ -32,7 +32,7 @@ const OrderSummary: React.FC = () => {
   };
 
   return (
-    <div className="border border-gray-300 rounded-t-none md:rounded-r-lg md:rounded-l-none flex flex-col justify-between w-full">
+    <div className="border border-gray-300 rounded-lg flex flex-col justify-between w-full">
       <div className="px-5 py-8 md:px-8 md:py-12 lg:px-10 lg:py-14 flex flex-col justify-between">
         <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-center md:text-left">Ringkasan Pesanan</h2>
 
