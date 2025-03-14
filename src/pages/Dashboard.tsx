@@ -36,7 +36,7 @@ const Dashboard = () => {
       <div className="flex md:flex-row gap-4 justify-between items-center relative">
         <div className="relative w-full md:max-w-6xl">
           <CiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900 text-lg" />
-          <input type="text" placeholder="Cari di Lentara" className="w-full pl-10 pr-4 py-2 md:py-3 border border-secondary-600 rounded-lg text-gray-900 bg-white focus:outline-none focus:ring-1 focus:ring-black" />
+          <input type="text" placeholder="Cari di Lentara" className="w-full pl-10 pr-4 py-2 md:py-3 border border-secondary-600 rounded-xl text-gray-900 bg-white focus:outline-none focus:ring-1 focus:ring-black" />
         </div>
 
         <div className="relative flex-shrink-0">
@@ -52,15 +52,15 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <div className="mt-10 bg-white p-6 md:p-8 rounded-[40px] border border-secondary-600 flex flex-col md:flex-row items-start md:items-center gap-4">
+        <p className="text-black">Anda dapat menambahkan produk yang dijual di Lentara. Produk dapat berupa alat elektronik, perkakas, peralatan hobi, keperluan acara, dan perlengkapan liburan.</p>
+        <Button text="Tambah Produk" variant="addProduct" />
+      </div>
+
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {stats.map((stat, index) => (
           <DashboardCard key={index} title={stat.title} value={stat.value} />
         ))}
-      </div>
-
-      <div className="mt-10 bg-white p-6 md:p-8 rounded-xl border border-secondary-600 flex flex-col md:flex-row items-start md:items-center gap-4">
-        <p className="text-black">Anda dapat menambahkan produk yang dijual di Lentara. Produk dapat berupa alat elektronik, perkakas, peralatan hobi, keperluan acara, dan perlengkapan liburan.</p>
-        <Button text="Tambah Produk" variant="addProduct" />
       </div>
     </div>
   );

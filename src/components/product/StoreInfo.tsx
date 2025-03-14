@@ -1,6 +1,5 @@
 import { Icon } from '@iconify/react';
 import { GoStarFill } from 'react-icons/go';
-import { CiHeart } from 'react-icons/ci';
 import Button from '../ui/Button';
 import avatarToko from '../../assets/avatarToko.png';
 import { Owner } from '../../types/owner';
@@ -27,7 +26,6 @@ const StoreInfo: React.FC<StoreInfoProps> = ({ seller }) => {
         <Button icon={<Icon icon="tabler:message" className=" w-4 h-4 md:w-6 md:h-6" />} variant={'transparent2'} text={'Chat'} />
         <Button icon={<Icon icon="tdesign:shop-4" className=" w-4 h-4 md:w-6 md:h-6" />} variant={'transparent2'} text={'Toko'} />
         <Button icon={<Icon icon="material-symbols:report-outline-rounded" className=" w-4 h-4 md:w-6 md:h-6" />} variant={'transparent2'} text={'Laporkan'} />
-        <Button icon={<CiHeart className="w-8 h-8" />} variant={'none'} />
       </div>
     </div>
   );
