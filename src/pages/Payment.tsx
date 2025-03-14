@@ -4,13 +4,17 @@ import OrderItem from '../components/payment/OrderItem';
 import PaymentMethod from '../components/payment/PaymentMethod';
 import OrderSummary from '../components/payment/OrderSummary';
 
+import cameraImage from '../assets/kameradslr.png';
+import gitarImage from '../assets/gitar.png';
+import basketImage from '../assets/gitar.png';
+
 const stores = [
   {
     name: 'Toko Rental Jaya',
     items: [
-      { name: 'Kamera DSLR', price: 150000, quantity: 1, duration: 3, imageUrl: '/src/assets/kameradslr.png' },
-      { name: 'Gitar Akustik', price: 80000, quantity: 1, duration: 5, imageUrl: '/src/assets/gitar.png' },
-      { name: 'Bola Basket', price: 10000, quantity: 1, duration: 7, imageUrl: '/src/assets/bolabasket.png' },
+      { name: 'Kamera DSLR', price: 150000, quantity: 1, duration: 3, imageUrl: cameraImage },
+      { name: 'Gitar Akustik', price: 80000, quantity: 1, duration: 5, imageUrl: gitarImage },
+      { name: 'Bola Basket', price: 10000, quantity: 1, duration: 7, imageUrl: basketImage },
     ],
   },
 ];
