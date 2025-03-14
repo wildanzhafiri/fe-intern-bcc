@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ text, onClick, type = 'button', variant
     secondary: 'bg-gray-500 rounded-lg px-3 md:px-6 py-2 hover:bg-gray-700 text-white',
     third: 'bg-primary-400 rounded-lg px-3 md:px-6 py-2 hover:bg-primary-600 text-white',
     daftar: 'bg-secondary-800 rounded-lg px-3 md:px-6 py-2 hover:bg-secondary-600 text-[#383838]',
-    addProduct: 'bg-primary-400 rounded-full px-3 md:px-6 py-3 hover:bg-primary-600 text-white whitespace-nowrap h-full item-center justify-center',
+    addProduct: 'bg-primary-400 rounded-full px-3 md:px-6 py-2 hover:bg-primary-600 text-white whitespace-nowrap h-full item-center justify-center',
     login: 'bg-green-500 rounded-lg px-3 md:px-6 py-2 hover:bg-green-700 text-white',
     arrowButton: 'px-3 py-3 bg-[#A3A3A3] rounded-full hover:scale-105 transition-transform duration-300',
     none: '',
