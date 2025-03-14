@@ -9,7 +9,7 @@ export interface Cart {
   storeName: string;
 }
 
-export interface CartSummary {
+export interface OrderSummary {
   user_id: string;
   product_count: number;
   delivery_cost: number;
@@ -18,4 +18,15 @@ export interface CartSummary {
   deposite_percentage: number;
   voucher: number;
   total_price: number;
+}
+
+export interface CartSummary {
+  name: string;
+  count: number;
+  price: number;
+}
+
+export interface CartSummaryResponse {
+  payload: CartSummary[];
+  totalPrice: number;
 }
