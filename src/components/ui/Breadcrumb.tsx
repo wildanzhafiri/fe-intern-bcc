@@ -1,4 +1,5 @@
 import { SlArrowRight } from 'react-icons/sl';
+import { useNavigate } from 'react-router-dom';
 
 interface BreadcrumbProps {
   productTitle: string;
@@ -6,16 +7,19 @@ interface BreadcrumbProps {
 }
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ productTitle, category }) => {
+  const navigate = useNavigate();
   return (
     <div className="md:mt-7">
-      <ul className="flex text-xs gap-1 text-[#2E4053] items-center">
-        <li className="cursor-pointer hover:text-black rounded-md">
+      <ul className="flex text-sm gap-1 text-[#2E4053] items-center">
+        <li className="cursor-pointer hover:text-primary-400 ">
           <a href="/">Beranda</a>
         </li>
         <SlArrowRight className="w-3 h-3" />
-        <li className="cursor-pointer hover:text-black rounded-md transition-all duration-300">{category}</li>
+        <li className="cursor-pointer hover:text-primary-400" onClick={() => navigate(`/category?category=${encodeURIComponent(category)}`)}>
+          {category}
+        </li>
         <SlArrowRight className="w-3 h-3" />
-        <li className="cursor-pointer hover:text-black rounded-md transition-all duration-300">{productTitle}</li>
+        <li className="cursor-pointer hover:text-primary-400">{productTitle}</li>
       </ul>
     </div>
   );
