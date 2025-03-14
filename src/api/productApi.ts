@@ -1,5 +1,6 @@
 import axiosInstance from './axiosInstance';
 import { Product } from '../types/product';
+import { Owner } from '../types/owner';
 
 type ApiResponse = {
   status?: boolean;
@@ -32,10 +33,13 @@ export const getProductsByCategory = async (category: string): Promise<Product[]
   }
 };
 
-export const getProductById = async (id: string): Promise<Product | null> => {
+export const getProductById = async (id: string): Promise<{ product: Product; seller: Owner } | null> => {
   try {
     const response = await axiosInstance.get(`/products/${id}`);
-    return response.data;
+    return {
+      product: response.data.product,
+      seller: response.data.seller,
+    };
   } catch (error) {
     console.error(`Failed to fetch product with ID ${id}:`, error);
     return null;
@@ -101,12 +105,43 @@ export const getProductMedia = async (id: string): Promise<string[]> => {
   }
 };
 
-export const getSearchProduct = async (title: string): Promise<Product[]> => {
+export const getFilteredProducts = async (category = '', rating = '', sort = '', searchQuery = ''): Promise<Product[]> => {
   try {
-    const response = await axiosInstance.get<ApiResponse>(`/search/${encodeURIComponent(title)}`);
-    return response.data.payload as Product[];
+    if (!category && !rating && !sort && !searchQuery) {
+      const response = await axiosInstance.get<ApiResponse>('/products');
+      return response.data.payload || [];
+    }
+
+    const requests = [];
+
+    if (category) {
+      requests.push(axiosInstance.get<ApiResponse>(`/products/category/${category}`).then((res) => res.data.payload || []));
+    }
+
+    if (rating) {
+      requests.push(axiosInstance.get<ApiResponse>(`/products/rating/${rating}`).then((res) => res.data.payload || []));
+    }
+
+    if (sort) {
+      requests.push(axiosInstance.get<ApiResponse>(`/products/sortprice/${sort}`).then((res) => res.data.payload || []));
+    }
+
+    if (searchQuery) {
+      requests.push(axiosInstance.get<ApiResponse>(`/search/${searchQuery}`).then((res) => res.data.payload || []));
+    }
+
+    const results = await Promise.all(requests);
+
+    if (results.length === 1) return results[0];
+
+    let filteredProducts = results[0];
+    for (let i = 1; i < results.length; i++) {
+      filteredProducts = filteredProducts.filter((product) => results[i].some((resultProduct) => resultProduct.id === product.id));
+    }
+
+    return filteredProducts;
   } catch (error) {
-    console.error(`Failed to fetch product with title ${title}:`, error);
+    console.error(`Failed to fetch filtered products:`, error);
     return [];
   }
 };
