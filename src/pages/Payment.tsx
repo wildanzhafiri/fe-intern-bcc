@@ -45,10 +45,10 @@ const Payment: React.FC = () => {
           </div>
         ))}
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-        <PaymentMethod />
-        <OrderSummary />
+      <div className="flex justify-center w-full">
+        <div className="w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
+          <OrderSummary />
+        </div>
       </div>
     </div>
   );
