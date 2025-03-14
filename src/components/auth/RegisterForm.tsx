@@ -112,6 +112,12 @@ const RegisterForm: React.FC = () => {
                   'Daftar'
                 )}
               </button>
+              <p className="mt-4 text-sm text-black text-center">
+                Sudah punya akun?{' '}
+                <a href="/login" className="text-primary-500 underline">
+                  Masuk.
+                </a>
+              </p>
             </form>
           </div>
         </div>

@@ -89,7 +89,7 @@ const LoginForm: React.FC = () => {
 
             <p className="mt-4 text-sm text-black  text-center">
               Belum punya akun?{' '}
-              <a href="/register" className="text-primary-500 underline font-semibold">
+              <a href="/register" className="text-primary-500 underline">
                 Daftar Sekarang.
               </a>
             </p>
