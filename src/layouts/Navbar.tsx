@@ -47,10 +47,7 @@ const Navbar = () => {
           <Link to="/" className="hover:text-primary-700">
             Promo
           </Link>
-          <Link to="/" className="hover:text-primary-700">
-            Daftar Pesanan
-          </Link>
-          <Link to="/" className="hover:text-primary-700">
+          <Link to="/ownerLogin" className="hover:text-primary-700">
             Mulai Beri Sewa
           </Link>
         </div>
@@ -66,7 +63,7 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex items-center w-40 lg:w-48 h-auto mx-4 md:mx-0">
-          <img src={logodanlentara} alt="lentara" className="h-12 md:h-16 w-auto object-contain" />
+          <img src={logodanlentara} onClick={() => navigate('/')} alt="lentara" className="h-12 md:h-16 w-auto object-contain cursor-pointer" />
         </div>
 
         <div className="flex flex-1 mx-4 md:mx-8">
@@ -83,20 +80,15 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-2 md:space-x-8">
-          <MdOutlineShoppingCart className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-primary-700 cursor-pointer" onClick={() => navigate(user ? '/Cartpage' : '/login')} />
+          <MdOutlineShoppingCart className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-primary-700 cursor-pointer" onClick={() => navigate(user ? '/cartpage' : '/login')} />
 
           {user ? (
-            <div className="flex items-center space-x-2 md:space-x-6">
+            <div className="flex items-center space-x-2 md:space-x-8">
               <TbMessage className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-primary-700 cursor-pointer" />
               <GoBell className="text-white w-6 h-6 md:w-7 md:h-7 hover:text-primary-700 cursor-pointer" />
 
               <div className="relative">
-                <img
-                  src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-                  className="hidden md:block w-8 h-8 md:w-12 md:h-12 rounded-full cursor-pointer"
-                  alt="User Avatar"
-                  onClick={() => setProfileOpen(!profileOpen)}
-                />
+                <img src={user.profile_picture} className="hidden md:block w-8 h-8 md:w-12 md:h-12 rounded-full cursor-pointer" alt="User Avatar" onClick={() => setProfileOpen(!profileOpen)} />
                 {profileOpen && (
                   <div className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-lg py-2">
                     <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" onClick={handleLogout} disabled={loading}>
@@ -123,17 +115,14 @@ const Navbar = () => {
           <Link to="/" className="hover:text-primary-700">
             Promo
           </Link>
-          <Link to="/" className="hover:text-primary-700">
-            Daftar Pesanan
-          </Link>
-          <Link to="/" className="hover:text-primary-700">
+          <Link to="/ownerLogin" className="hover:text-primary-700">
             Mulai Beri Sewa
           </Link>
 
           {user ? (
             <div className="flex flex-col items-center pt-4">
-              <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" className="w-12 h-12 rounded-full cursor-pointer" alt="User Avatar" />
-              <p className="text-gray-700 mt-2">Username</p>
+              <img src={user.profile_picture} className="w-12 h-12 rounded-full cursor-pointer" alt="User Avatar" />
+              <p className="text-gray-700 mt-2">{user.username}</p>
 
               <button className="mt-3 px-4 py-2 bg-red-500 text-white rounded-md w-full text-center" onClick={handleLogout} disabled={loading}>
                 {loading ? 'Logging out...' : 'Logout'}
@@ -141,7 +130,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center my-2 gap-3">
-              <Button onClick={() => navigate('/login')} variant="transparent2" text="Masuk" full />
+              <Button onClick={() => navigate('/login')} variant="primary" text="Masuk" full />
               <Button onClick={() => navigate('/register')} variant="daftar" text="Daftar" full />
             </div>
           )}
