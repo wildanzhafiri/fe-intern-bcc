@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCartByUser, getCartSummary } from '../api/cartApi';
-import { CartSummary } from '../types/cart';
+import { getCartByUser, getCartSummary, getOrderSummary } from '../api/cartApi';
+import { CartSummaryResponse, OrderSummary } from '../types/cart';
 
 export const useCart = () => {
   return useQuery({
@@ -9,8 +9,15 @@ export const useCart = () => {
   });
 };
 
+export const useOrderSummary = () => {
+  return useQuery<OrderSummary | null>({
+    queryKey: ['orderSummary'],
+    queryFn: getOrderSummary,
+  });
+};
+
 export const useCartSummary = () => {
-  return useQuery<CartSummary>({
+  return useQuery<CartSummaryResponse | null>({
     queryKey: ['cartSummary'],
     queryFn: getCartSummary,
   });
