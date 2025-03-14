@@ -46,7 +46,6 @@ const ProductDetail = () => {
       </div>
 
       <ReviewProduct />
-
       <RelatedProducts />
     </div>
   );
