@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice';
-import { useCartSummary } from '../../hooks/useCart';
+import { useOrderSummary } from '../../hooks/useCart';
 import { createMidtransTransaction } from '../../hooks/useMidtrans';
 
 const OrderSummary: React.FC = () => {
-  const { data: summary } = useCartSummary();
+  const { data: summary } = useOrderSummary();
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
