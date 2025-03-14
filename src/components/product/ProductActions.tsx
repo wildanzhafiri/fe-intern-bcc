@@ -13,7 +13,6 @@ interface Props {
 
 const ProductActions: React.FC<Props> = ({ productId, count, rentDuration }) => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
 
   const { user } = useAuth();
 
@@ -26,17 +25,15 @@ const ProductActions: React.FC<Props> = ({ productId, count, rentDuration }) => 
     }
 
     setLoading(true);
-    setMessage(null);
 
     setLoading(true);
-    setMessage(null);
 
     try {
       const response = await addToCart(productId, count, rentDuration);
-      setMessage('Berhasil menambahkan ke keranjang!');
+      console.log('Berhasil menambahkan ke keranjang!');
       console.log('Cart response:', response);
     } catch (error) {
-      setMessage('Gagal menambahkan ke keranjang.');
+      console.log('Gagal menambahkan ke keranjang.');
     } finally {
       setLoading(false);
     }

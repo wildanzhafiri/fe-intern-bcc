@@ -44,7 +44,7 @@ const Payment: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
         <PaymentMethod />
-        <OrderSummary stores={stores} />
+        <OrderSummary />
       </div>
     </div>
   );

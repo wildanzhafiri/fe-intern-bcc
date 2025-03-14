@@ -3,7 +3,7 @@ import { formatPrice } from '../../utils/formatPrice';
 import { useCartSummary } from '../../hooks/useCart';
 
 const OrderSummary: React.FC = () => {
-  const { data: summary, isLoading, error } = useCartSummary();
+  const { data: summary } = useCartSummary();
 
   return (
     <div className="border border-gray-300 rounded-t-none md:rounded-r-lg md:rounded-l-none flex flex-col justify-between w-full">
