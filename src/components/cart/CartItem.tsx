@@ -37,7 +37,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
                 <select className="border py-2 rounded-lg w-full md:w-40 h-10 appearance-none px-4">
                   <option>Pilih</option>
                   <option>1 Hari</option>
-                  <option>1 Minggu</option>
+                  <option>3 Hari</option>
+                  <option>5 Hari</option>
+                  <option>7 Hari</option>
                 </select>
                 <IoMdArrowDropdown className="absolute right-5 bottom-2.5 w-5 h-5 pointer-events-none text-gray-600" />
               </div>
