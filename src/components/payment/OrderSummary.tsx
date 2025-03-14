@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice';
 import { useCartSummary } from '../../hooks/useCart';
+import { createMidtransTransaction } from '../../hooks/useMidtrans';
 
 const OrderSummary: React.FC = () => {
   const { data: summary } = useCartSummary();
+  const [loading, setLoading] = useState(false);
+
+  const handlePayment = async () => {
+    if (!summary?.total_price) {
+      alert('Total harga tidak valid');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await createMidtransTransaction(summary.total_price);
+      console.log('Midtrans API Response:', response);
+      if (response && response.redirect_url) {
+        window.location.href = response.redirect_url;
+      } else {
+        alert('Gagal mendapatkan URL pembayaran');
+      }
+    } catch (error) {
+      console.error('Error saat membuat transaksi Midtrans:', error);
+      alert('Terjadi kesalahan saat memproses pembayaran.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="border border-gray-300 rounded-t-none md:rounded-r-lg md:rounded-l-none flex flex-col justify-between w-full">
@@ -40,7 +66,9 @@ const OrderSummary: React.FC = () => {
         </div>
       </div>
 
-      <button className="w-full bg-primary-400 text-white py-3 md:py-4 text-lg md:text-xl font-semibold">Mulai Sewa</button>
+      <button className="w-full bg-primary-400 text-white py-3 md:py-4 text-lg md:text-xl font-semibold" onClick={handlePayment}>
+        {loading ? 'Memproses...' : 'Mulai Sewa'}
+      </button>
     </div>
   );
 };
