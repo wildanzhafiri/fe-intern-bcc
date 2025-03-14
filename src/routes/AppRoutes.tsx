@@ -12,6 +12,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProtectedRoutes from './ProtectedRoutes';
 import CartPage from '../pages/Cartpage';
 import Payment from '../pages/Payment';
+import Dashboard from '../pages/Dashboard';
+import Toko from '../pages/Toko';
+import LayoutDasboard from '../layouts/LayoutDasboard';
+import OwnerRegister from '../pages/OwnerRegister';
+import OwnerLogin from '../pages/OwnerLogin';
+import Favorite from '../pages/Favorite';
+import ProtectedDashboardRoutes from './ProtectedDashboardRoutes';
 
 const queryClient = new QueryClient();
 const AppRoutes = () => {
@@ -19,15 +26,37 @@ const AppRoutes = () => {
   const { loading, startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
-    startLoading();
-    const timer = setTimeout(() => stopLoading(), 700);
-    return () => clearTimeout(timer);
+    if (!location.pathname.startsWith('/dashboard')) {
+      startLoading();
+      const timer = setTimeout(() => stopLoading(), 700);
+      return () => clearTimeout(timer);
+    }
   }, [location]);
 
   return (
     <>
       <Loading loading={loading} />
       <Routes>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedDashboardRoutes>
+              <LayoutDasboard>
+                <Dashboard />
+              </LayoutDasboard>
+            </ProtectedDashboardRoutes>
+          }
+        />
+        <Route
+          path="/dashboard/toko"
+          element={
+            <ProtectedDashboardRoutes>
+              <LayoutDasboard>
+                <Toko />
+              </LayoutDasboard>
+            </ProtectedDashboardRoutes>
+          }
+        />
         <Route
           path="/"
           element={
@@ -56,8 +85,9 @@ const AppRoutes = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         <Route
-          path="/Cartpage"
+          path="/cartpage"
           element={
             <ProtectedRoutes>
               <MainLayout>
@@ -67,15 +97,25 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/payment"
+          path="/favorite"
           element={
             <ProtectedRoutes>
               <MainLayout>
-                <Payment />
+                <Favorite />
               </MainLayout>
             </ProtectedRoutes>
           }
         />
+        <Route
+          path="/payment"
+          element={
+            <MainLayout>
+              <Payment />
+            </MainLayout>
+          }
+        />
+        <Route path="/ownerRegister" element={<OwnerRegister />} />
+        <Route path="/ownerLogin" element={<OwnerLogin />} />
       </Routes>
     </>
   );
