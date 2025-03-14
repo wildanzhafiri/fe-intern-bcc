@@ -5,15 +5,21 @@ import { useProducts } from '../../hooks/useProduct';
 interface ProductListProps {
   searchQuery?: string;
   category?: string;
+  rating?: string;
+  price?: string;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ searchQuery = '', category = '' }) => {
-  const { data: products, isLoading, error } = useProducts(searchQuery, category);
+const ProductList: React.FC<ProductListProps> = ({ searchQuery = '', category = '', rating = '', price = '' }) => {
+  const { data: products, isLoading, error } = useProducts(searchQuery, category, rating, price);
 
   const navigate = useNavigate();
 
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Failed to fetch products</p>;
+
+  if (!products || products.length === 0) {
+    return <p className="text-center text-black text-xl my-10">Produk Tidak Ditemukan</p>;
+  }
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 my-10 max-w-screen-xl">
