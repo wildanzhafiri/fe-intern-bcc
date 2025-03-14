@@ -4,7 +4,12 @@ export interface Product {
   description: string;
   Specification: string;
   category: string;
-  price: number;
+  origin: string;
+  seller_id?: string;
+  price_1: number;
+  price_3: number;
+  price_5: number;
+  price_7: number;
   stock: number;
   rent_count: number;
   rating: number;
