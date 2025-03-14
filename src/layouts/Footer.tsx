@@ -17,7 +17,7 @@ const Footer = () => {
         </div>
 
         <div className="w-full md:w-auto">
-          <h3 className="font-bold mb-2 text-white">(Nama platform)</h3>
+          <h3 className="font-bold mb-2 text-white">Lentara</h3>
           <ul className="space-y-2 text-white">
             <li className="cursor-pointer hover:text-primary-700">Tentang Kami</li>
             <li className="cursor-pointer hover:text-primary-700">Blog</li>
