@@ -30,14 +30,14 @@ const Slider: React.FC = () => {
           {images.map((pair, index) => (
             <div
               key={index}
-              className="flex w-full flex-shrink-0 gap-2 sm:gap-4 md:gap-6 
-                        flex-col sm:flex-row"
+              className="flex w-full flex-shrink-0 gap-2 md:gap-6 
+                        flex-col md:flex-row"
             >
-              <div className="w-full h-[250px] sm:w-1/2 sm:h-[300px] lg:h-[400px]">
+              <div className="w-full h-[200px] md:h-[300px] lg:h-[400px]">
                 <img src={pair[0]} alt={`Slide ${index + 1} - Image 1`} className="w-full h-full rounded-xl object-contain" />
               </div>
 
-              <div className="w-full h-[250px] sm:w-1/2 sm:h-[300px] lg:h-[400px]">
+              <div className="w-full h-[200px] md:h-[300px] lg:h-[400px]">
                 <img src={pair[1]} alt={`Slide ${index + 1} - Image 2`} className="w-full h-full rounded-xl object-contain" />
               </div>
             </div>
