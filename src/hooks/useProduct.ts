@@ -1,18 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { getProducts, getProductsByCategory, getProductById, getProductSpecifications, getProductMedia, getSearchProduct } from '../api/productApi';
+import { getProductsByCategory, getProductById, getProductSpecifications, getProductMedia, getFilteredProducts } from '../api/productApi';
 import { Product } from '../types/product';
+import { Owner } from '../types/owner';
 
-export const useProducts = (searchQuery = '', category = '') => {
-  return useQuery<Product[], Error>({
-    queryKey: ['products', searchQuery, category],
-    queryFn: () => {
-      if (category) {
-        return getProductsByCategory(category);
-      }
-      if (searchQuery) {
-        return getSearchProduct(searchQuery);
-      }
-      return getProducts();
+export const useProducts = (searchQuery = '', category = '', rating = '', price = '') => {
+  return useQuery<Product[]>({
+    queryKey: ['products', searchQuery, category, rating, price],
+    queryFn: async () => {
+      return await getFilteredProducts(category, rating, price, searchQuery);
     },
     staleTime: 1000 * 60 * 1,
   });
@@ -27,10 +22,13 @@ export const useProductsByCategory = (category: string) => {
   });
 };
 
-export const useProductById = (id: string) => {
-  return useQuery<Product | null>({
+export const useProductById = (id?: string) => {
+  return useQuery<{ product: Product; seller: Owner } | null>({
     queryKey: ['product', id],
-    queryFn: async () => await getProductById(id),
+    queryFn: async () => {
+      if (!id) throw new Error('Product ID is required');
+      return getProductById(id);
+    },
     enabled: !!id,
     staleTime: 1000 * 60 * 5,
   });
