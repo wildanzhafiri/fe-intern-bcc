@@ -1,16 +1,17 @@
-// components/product/ProductOptions.tsx
 import { FaPlus, FaMinus } from 'react-icons/fa6';
-import { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Product } from '../../types/product';
 import { formatPrice } from '../../utils/formatPrice';
 
 interface ProductOptionsProps {
   product: Product;
+  count: number;
+  setCount: (value: number) => void;
+  rentDuration: number;
+  setRentDuration: (value: number) => void;
 }
 
-const ProductOptions: React.FC<ProductOptionsProps> = ({ product }) => {
-  const [count, setCount] = useState<number>(1);
+const ProductOptions: React.FC<ProductOptionsProps> = ({ product, count, setCount, rentDuration, setRentDuration }) => {
   const stock = product.stock;
 
   return (
@@ -19,8 +20,11 @@ const ProductOptions: React.FC<ProductOptionsProps> = ({ product }) => {
         <div className="w-full md:w-1/2 p-4">
           <div className="relative w-full">
             <label className="text-gray-600">Durasi Sewa</label>
-            <select className="w-full border-2 mt-2 border-gray-300 py-2 px-4 pr-10 rounded-lg transition duration-300 appearance-none">
-              <option>Pilih</option>
+            <select className="w-full border-2 mt-2 border-gray-300 py-2 px-4 pr-10 rounded-lg transition duration-300 appearance-none" value={rentDuration} onChange={(e) => setRentDuration(Number(e.target.value))}>
+              <option value={1}>1 hari</option>
+              <option value={3}>3 hari</option>
+              <option value={5}>5 hari</option>
+              <option value={7}>7 hari</option>
             </select>
             <IoMdArrowDropdown className="absolute right-5 bottom-2.5 text-gray-600 w-5 h-5 pointer-events-none" />
           </div>
@@ -44,7 +48,7 @@ const ProductOptions: React.FC<ProductOptionsProps> = ({ product }) => {
         <div className="w-full md:w-1/2 p-4 flex items-center">
           <div>
             <label className="block text-gray-600 md:mb-2">Harga</label>
-            <p className="text-2xl md:text-4xl font-semibold text-primary-400">Rp{formatPrice(product.price)}</p>
+            <p className="text-2xl lg:text-2xl font-semibold text-primary-400">Rp{formatPrice(product.price_1)}/hari</p>
           </div>
         </div>
       </div>
