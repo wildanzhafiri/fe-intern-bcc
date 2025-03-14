@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SellerInfo from '../components/payment/SellerInfo';
 import OrderItem from '../components/payment/OrderItem';
-import PaymentMethod from '../components/payment/PaymentMethod';
 import OrderSummary from '../components/payment/OrderSummary';
 
 import cameraImage from '../assets/kameradslr.png';
